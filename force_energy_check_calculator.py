@@ -25,10 +25,10 @@ class ForceEnergyCheckCalculator(Calculator):
         secondary,
         force_angle_threshold,
         energy_difference_per_atom,
-        referance_energy_main=None,
-        referance_energy_secondary=None,
-        referance_energies_main=None,
-        referance_energies_secondary=None,
+        reference_energy_main=None,
+        reference_energy_secondary=None,
+        reference_energies_main=None,
+        reference_energies_secondary=None,
         force_difference_threshold=0.005,  # eV/Å = 5 meV/Å
         force_dump_file="force_triggered.xyz",
         energy_dump_file="energy_triggered.xyz",
@@ -39,11 +39,11 @@ class ForceEnergyCheckCalculator(Calculator):
         self.main = main
         self.secondary = secondary
 
-        self.referance_energy_main = referance_energy_main
-        self.referance_energy_secondary = referance_energy_secondary
+        self.reference_energy_main = reference_energy_main
+        self.reference_energy_secondary = reference_energy_secondary
         
-        self.referance_energies_main = referance_energies_main
-        self.referance_energies_secondary = referance_energies_secondary
+        self.reference_energies_main = reference_energies_main
+        self.reference_energies_secondary = reference_energies_secondary
 
         self.force_angle_threshold = force_angle_threshold
         self.energy_difference_per_atom = (energy_difference_per_atom)
@@ -130,11 +130,11 @@ class ForceEnergyCheckCalculator(Calculator):
             ener1 = self.main.get_potential_energy(atoms)
             ener2 = self.secondary.get_potential_energy(atoms)
             n_atoms = atoms.get_global_number_of_atoms()
-            energy_diff_per_atom = ((ener1-self.referance_energy_main) - (ener2-self.referance_energy_secondary))/n_atoms
-            if (self.referance_energies_main is not None) and (self.referance_energies_secondary is not None):
+            energy_diff_per_atom = ((ener1-self.reference_energy_main) - (ener2-self.reference_energy_secondary))/n_atoms
+            if (self.reference_energies_main is not None) and (self.reference_energies_secondary is not None):
                 eners1=self.main.get_potential_energies(atoms)
                 eners2=self.secondary.get_potential_energies(atoms)
-                energies_diff = (eners1-self.referance_energies_main)-(eners2-self.referance_energies_secondary)
+                energies_diff = (eners1-self.reference_energies_main)-(eners2-self.reference_energies_secondary)
             if ( np.abs(energy_diff_per_atom) > self.energy_difference_per_atom):
                 atoms_to_save = atoms.copy()
                 atoms_to_save.info[ "trigger_reason" ] = "energy_difference"
