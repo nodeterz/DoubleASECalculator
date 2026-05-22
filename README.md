@@ -187,10 +187,13 @@ The wrapper identifies configurations where the ML model may become unreliable a
 | `secondary` | Reference calculator used for comparison |
 | `force_angle_threshold` | Cosine similarity threshold |
 | `energy_difference_per_atom` | Energy disagreement threshold |
+| `reference_energy_main` | Reference energy from the main calculator |
+| `reference_energy_secondary` | Reference energy from the second calculator |
+| `reference_energies_main` | Reference atomic energies from the main calculator (Optional)|
+| `reference_energies_secondary` | Reference atomic energies from the second calculator (Optional) |
 | `force_difference_threshold` | Force disagreement threshold for zero-norm cases |
 | `force_dump_file` | File for force-triggered structures |
 | `energy_dump_file` | File for energy-triggered structures |
-
 ---
 
 # Notes
@@ -199,7 +202,7 @@ The wrapper identifies configurations where the ML model may become unreliable a
 - The secondary calculator is only used for consistency checks.
 - Structures are appended incrementally to XYZ files for later inspection.
 - The calculator is fully compatible with ASE optimizers and MD workflows.
-
+- The reference energies must be calculated from a similar structure, and this is required to cancel out the energy bias.
 ---
 
 # License
