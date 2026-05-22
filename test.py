@@ -15,19 +15,19 @@ atoms.write('posinp.extxyz')
 calc1 = LennardJones(epsilon=3.837914780509462, sigma=1.840593221635568)
 calc2 = LennardJones(epsilon=3.837914780509462, sigma=1.940593221635568)
 atoms.calc=calc1
-referance_energy_main=atoms.get_potential_energy()
-referance_energies_main=atoms.get_potential_energies()
+reference_energy_main=atoms.get_potential_energy()
+reference_energies_main=atoms.get_potential_energies()
 atoms.calc=calc2
-referance_energy_secondary=atoms.get_potential_energy()
-referance_energies_secondary=atoms.get_potential_energies()
+reference_energy_secondary=atoms.get_potential_energy()
+reference_energies_secondary=atoms.get_potential_energies()
 
 atoms.calc = ForceEnergyCheckCalculator(
     main=calc1,
     secondary=calc2,
-    referance_energy_main=referance_energy_main,
-    referance_energy_secondary=referance_energy_secondary,
-    referance_energies_main=referance_energies_main,
-    referance_energies_secondary=referance_energies_secondary,
+    reference_energy_main=reference_energy_main,
+    reference_energy_secondary=reference_energy_secondary,
+    reference_energies_main=reference_energies_main,
+    reference_energies_secondary=reference_energies_secondary,
     force_angle_threshold=0.95,
     energy_difference_per_atom=0.001,
 )
